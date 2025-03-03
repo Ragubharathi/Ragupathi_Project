@@ -1,12 +1,10 @@
 resource "aws_iam_role" "node_group_role" {
-  name = "eks_node_group_role"
-  assume_role_policy = jsonencode ({
-    Statement  = [{
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Principal = {
-           Service = "eks.amazonaws.com"
-           }
+  name = "eks-node-group-role"
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = { Service = "ec2.amazonaws.com" }
     }]
   })
 }
