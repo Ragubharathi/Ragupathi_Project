@@ -15,6 +15,16 @@ resource "aws_iam_role_policy_attachment" "node_policy" {
 
 }
 
+resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
+  role       = aws_iam_role.node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_container_registry_policy" {
+  role       = aws_iam_role.node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 resource "aws_eks_node_group" "eks_nodes" {
   cluster_name = aws_eks_cluster.eks_cluster.name
   node_group_name = "eks_node_group"
